@@ -1,6 +1,7 @@
 import { homedir } from 'os';
-import { COMMANDS } from './utils/constants';
+import { COMMANDS } from './utils/constants.js';
 
+import { up } from './nwd/index.js';
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
 console.log(`Welcome to the File Manager, ${userName}!`);
 
@@ -9,12 +10,12 @@ console.log(`You are currently in ${curDir}`);
 
 const FM = () => {
   process.stdin.on('data', data => {
-    const dataStringified = data.toString();
-    const command = dataStringified.toString().split(' ')[0];
+    const commandString = data.toString().trim();
+    const command = commandString.toString().split(' ')[0];
 
     switch (command) {
       case COMMANDS.up:
-        // код для команды up
+        curDir = up(curDir);
         break;
       case COMMANDS.cd:
         // код для команды cd
@@ -50,8 +51,10 @@ const FM = () => {
         // код, который выполнится, если команда неизвестна
         break;
     }
+    console.log(`You are currently in ${curDir}`);
   });
   
+
   process.on('SIGINT', () => {
     console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
     process.exit();
