@@ -1,7 +1,8 @@
 import { homedir } from 'os';
-import { COMMANDS } from './utils/constants.js';
+import { curDir as dir, COMMANDS } from './utils/index.js';
 import { cwd, chdir } from "node:process";
 import { up, cd, ls } from './nwd/index.js';
+import { cat } from './fs/index.js';
 
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -10,8 +11,7 @@ chdir(homedir());
 
 let curDir = cwd();
 
-console.log(`You are currently in ${curDir}`);
-
+dir(curDir);
 
 const FM = () => {
   process.stdin.on('data', async data => {
@@ -33,7 +33,8 @@ const FM = () => {
         // код для команды add
         break;
       case COMMANDS.cat:
-        // код для команды cat
+        const file = command[1];
+        cat(curDir, file);
         break;
       case COMMANDS.cp:
         // код для команды cp
