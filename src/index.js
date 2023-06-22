@@ -1,24 +1,29 @@
 import { homedir } from 'os';
 import { COMMANDS } from './utils/constants.js';
+import { cwd, chdir } from "node:process";
+import { up, cd } from './nwd/index.js';
 
-import { up } from './nwd/index.js';
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
 console.log(`Welcome to the File Manager, ${userName}!`);
 
-let curDir = homedir();
+chdir(homedir());
+
+let curDir = cwd();
+
 console.log(`You are currently in ${curDir}`);
 
 const FM = () => {
-  process.stdin.on('data', data => {
+  process.stdin.on('data', async data => {
     const commandString = data.toString().trim();
-    const command = commandString.toString().split(' ')[0];
+    const command = commandString.toString().split(' ');
 
-    switch (command) {
+    switch (command[0]) {
       case COMMANDS.up:
         curDir = up(curDir);
         break;
       case COMMANDS.cd:
-        // код для команды cd
+        const path = command[1];
+        curDir = await cd(curDir, path);
         break;
       case COMMANDS.ls:
         // код для команды ls
