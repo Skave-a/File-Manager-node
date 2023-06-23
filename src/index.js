@@ -3,6 +3,7 @@ import { curDir as dir, COMMANDS } from './utils/index.js';
 import { cwd, chdir } from "node:process";
 import { up, cd, ls } from './nwd/index.js';
 import { cat, add, rn, cp, mv, rm } from './fs/index.js';
+import { osFn as os } from './os/os.js';
 
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -49,13 +50,13 @@ const FM = () => {
         await rn(curDir, file, secondfile);
         break;
       case COMMANDS.os:
-        // код для команды os
+        os(file);
         break;
       case COMMANDS.hash:
         // код для команды hash
         break;
       default:
-        // код, который выполнится, если команда неизвестна
+        сonsole.log('Invalid command');
         break;
     }
     console.log(`You are currently in ${curDir}`);
