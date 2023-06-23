@@ -10,4 +10,6 @@ export const COMMANDS = {
   rn: 'rn',
   os: 'os',
   hash: 'hash',
+  compress: 'compress',
+  decompress: 'decompress',
 }

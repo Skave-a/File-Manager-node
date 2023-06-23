@@ -5,6 +5,7 @@ import { up, cd, ls } from './nwd/index.js';
 import { cat, add, rn, cp, mv, rm } from './fs/index.js';
 import { osFn as os } from './os/os.js';
 import { hash } from './hash/hash.js';
+import { compress, decompress } from './compress/index.js';
 
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -55,6 +56,12 @@ const FM = () => {
         break;
       case COMMANDS.hash:
         hash(curDir, file);
+        break;
+      case COMMANDS.compress:
+        await compress(curDir, file, secondfile);
+        break;
+      case COMMANDS.decompress:
+        await decompress(curDir, file, secondfile);
         break;
       default:
         сonsole.log('Invalid command');

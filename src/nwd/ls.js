@@ -6,6 +6,7 @@ export const ls = async (curDir) => {
 
   try {
     const files = await readdir(curDir, { withFileTypes: true });
+
     for await (const file of files) {
       if (file.isFile() ) {
         filesInDir.push(file.name);

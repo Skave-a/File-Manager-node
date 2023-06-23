@@ -8,13 +8,19 @@ export const cat = (curDir, file) => {
 
   const readableStream = createReadStream(pathFile);
 
-  readableStream.on('data', (data) => {
-    console.log(data.toString());
-    readableStream.destroy();
-  });
+  try {
+    readableStream.on('data', (data) => {
+      console.log(data.toString());
+      readableStream.destroy();
+    });
+    
+    readableStream.on('close', () => {
+      dir(curDir);
+    });
+  } catch(err) {
+    console.log('Error: ');
+    return curDir;
+  }
   
-  readableStream.on('close', () => {
-    dir(curDir);
-  });
   return curDir;
 };
