@@ -2,7 +2,7 @@ import { homedir } from 'os';
 import { curDir as dir, COMMANDS } from './utils/index.js';
 import { cwd, chdir } from "node:process";
 import { up, cd, ls } from './nwd/index.js';
-import { cat, add, rn, cp } from './fs/index.js';
+import { cat, add, rn, cp, mv } from './fs/index.js';
 
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -40,7 +40,7 @@ const FM = () => {
         await cp(curDir, file, secondfile);
         break;
       case COMMANDS.mv:
-        // код для команды mv
+        await mv(curDir, file, secondfile);
         break;
       case COMMANDS.rm:
         // код для команды rm
