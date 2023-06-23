@@ -1,6 +1,7 @@
 import fs from 'fs';
 import crypto from 'crypto';
 import path from 'path';
+import { curDir as dir} from '../utils/index.js';
 
 export const hash = (curDir, file) => {
   
@@ -15,6 +16,7 @@ export const hash = (curDir, file) => {
   fileStream.on('end', () => {
     const fileHash = hash.digest('hex');
     console.log(`Hash - ${fileHash}`);
+    dir(curDir);
   });
 
   fileStream.on('error', (err) => {
