@@ -4,6 +4,7 @@ import { cwd, chdir } from "node:process";
 import { up, cd, ls } from './nwd/index.js';
 import { cat, add, rn, cp, mv, rm } from './fs/index.js';
 import { osFn as os } from './os/os.js';
+import { hash } from './hash/hash.js';
 
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
 console.log(`Welcome to the File Manager, ${userName}!`);
@@ -53,7 +54,7 @@ const FM = () => {
         os(file);
         break;
       case COMMANDS.hash:
-        // код для команды hash
+        hash(curDir, file);
         break;
       default:
         сonsole.log('Invalid command');
