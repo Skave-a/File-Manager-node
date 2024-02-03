@@ -1,8 +1,12 @@
 import { chdir, cwd } from 'node:process';
-import  path  from 'path';
+import path from 'path';
 
 export const cd = (curDir, path2) => {
-  if (path === undefined ) return curDir;
+  if (path2 === undefined) return curDir;
+
+  if (curDir.endsWith(':')) {
+    path2 = '\\' + path2;
+  }
 
   let dir;
 
@@ -13,5 +17,6 @@ export const cd = (curDir, path2) => {
     console.log(err);
     return curDir;
   }
+
   return dir;
-}
+};
