@@ -12,6 +12,7 @@ console.log(`Welcome to the File Manager, ${userName}!`);
 
 chdir(homedir());
 
+// для получения текущего рабочего каталога
 let curDir = cwd();
 
 dir(curDir);
@@ -67,7 +68,7 @@ const FM = () => {
         await decompress(curDir, file, secondfile);
         break;
       default:
-        сonsole.log('Invalid command');
+        console.log('Invalid command');
         break;
     }
     console.log(`You are currently in ${curDir}`);
