@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import zlib from 'zlib';
+import log from '../utils/log.js';
 
 export const decompress = async (curDir, file, secondfile) => {
 
@@ -15,19 +16,19 @@ export const decompress = async (curDir, file, secondfile) => {
     const brotli = zlib.createBrotliDecompress();
   
     readStream.on('error', (err) => {
-      console.log(err.message);
-      console.log('Invalid command');
+      log.red(err.message);
+      log.blue('Invalid command');
     });
   
     writeStream.on('error', (err) => {
-      console.log(err.message);
-      console.log('Invalid command');
+      log.red(err.message);
+      log.blue('Invalid command');
     });
   
     readStream.pipe(brotli).pipe(writeStream);
   } catch (err) {
-    console.log(err.message);
-    console.log('Invalid command');
+    log.red(err.message);
+    log.blue('Invalid command');
   }
   
 }

@@ -1,4 +1,5 @@
+import log from '../utils/log.js';
 
 export const curDir = (curDir) => {
-  console.log(`You are currently in ${curDir}`);
+  log.blue(`You are currently in ${curDir}`);
 };

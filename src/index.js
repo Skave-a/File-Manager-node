@@ -1,14 +1,15 @@
+import { chdir, cwd } from "node:process";
 import { homedir } from 'os';
-import { curDir as dir, COMMANDS, exit } from './utils/index.js';
-import { cwd, chdir } from "node:process";
-import { up, cd, ls } from './nwd/index.js';
-import { cat, add, rn, cp, mv, rm } from './fs/index.js';
-import { osFn as os } from './os/os.js';
-import { hash } from './hash/hash.js';
 import { compress, decompress } from './compress/index.js';
+import { add, cat, cp, mv, rm, rn } from './fs/index.js';
+import { hash } from './hash/hash.js';
+import { cd, ls, up } from './nwd/index.js';
+import { osFn as os } from './os/os.js';
+import { COMMANDS, curDir as dir, exit } from './utils/index.js';
+import log from './utils/log.js';
 
 const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
-console.log(`Welcome to the File Manager, ${userName}!`);
+log.yellow(`Welcome to the File Manager, ${userName}!`);
 
 chdir(homedir());
 
@@ -68,10 +69,10 @@ const FM = () => {
         await decompress(curDir, file, secondfile);
         break;
       default:
-        console.log('Invalid command');
+        log.blue('Invalid command');
         break;
     }
-    console.log(`You are currently in ${curDir}`);
+    log.green(`You are currently in ${curDir}`);
   });
   
 

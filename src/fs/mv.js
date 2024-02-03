@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import log from '../utils/log.js';
 
 export const mv = async (curDir, file, targetDir) => {
   const sourcePath = path.join(curDir, file);
@@ -8,7 +9,7 @@ export const mv = async (curDir, file, targetDir) => {
     
     const newName = path.join(curDir, secondfile);
     await fs.promises.access(newName);
-    console.log(`File ${secondfile} already exists`);
+    log.red(`File ${secondfile} already exists`);
     return;
   } catch (error) {
     try {
@@ -24,8 +25,8 @@ export const mv = async (curDir, file, targetDir) => {
         await fs.promises.unlink(sourcePath);
       });
     } catch (err) {
-      console.log(err.message);
-      console.log('Invalid command');
+      log.red(err.message);
+      log.blue('Invalid command');
     }
   }
 };

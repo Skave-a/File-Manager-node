@@ -1,5 +1,6 @@
 import { chdir, cwd } from 'node:process';
 import path from 'path';
+import log from '../utils/log.js';
 
 export const cd = (curDir, path2) => {
   if (path2 === undefined) return curDir;
@@ -14,8 +15,8 @@ export const cd = (curDir, path2) => {
     chdir(path.resolve(curDir, path2));
     dir = cwd();
   } catch (err) {
-    console.log(err.message);
-    console.log('Invalid command');
+    log.red(err.message);
+    log.blue('Invalid command');
     return curDir;
   }
 

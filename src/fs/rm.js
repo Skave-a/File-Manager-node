@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import log from '../utils/log.js';
 
 export const rm = async (curDir, file) => {
 
@@ -7,7 +8,7 @@ export const rm = async (curDir, file) => {
       const pathFile = path.join(curDir, file);
       await fs.promises.unlink(pathFile);
     } catch (err) {
-      console.log(err.message);
-      console.log('Invalid command');
+      log.red(err.message);
+      log.blue('Invalid command');
     }
 };

@@ -13,8 +13,8 @@ export const cat = (curDir, file) => {
   });
 
   readableStream.on('error', (err) => {
-    onsole.log(err.message);
-    console.log('Invalid command');
+    log.red(err.message);
+    log.blue('Invalid command');
     dir(curDir);
   });
 

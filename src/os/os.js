@@ -1,29 +1,30 @@
 import os from 'os';
+import log from '../utils/log.js';
 
 export const osFn = (flag) => {
   
   switch (flag) {
     case '--EOL':
-      console.log(`System end-of-line: ${JSON.stringify(os.EOL)}`);
+      log.magenta(`System end-of-line: ${JSON.stringify(os.EOL)}`);
       break;
     case '--cpus':
       const cpus = os.cpus();
-      console.log(`Total CPUs: ${cpus.length}`);
+      log.magenta(`Total CPUs: ${cpus.length}`);
       cpus.forEach((cpu, index) => {
-        console.log(`CPU ${index + 1}: ${cpu.model} @ ${cpu.speed/1000}GHz`);
+        log.magenta(`CPU ${index + 1}: ${cpu.model} @ ${cpu.speed/1000}GHz`);
       });
       break;
     case '--homedir':
-      console.log(`Home directory: ${os.homedir()}`);
+      log.magenta(`Home directory: ${os.homedir()}`);
       break;
     case '--username':
-      console.log(`Current user: ${os.userInfo().username}`);
+      log.magenta(`Current user: ${os.userInfo().username}`);
       break;
     case '--architecture':
-      console.log(`CPU architecture: ${os.arch()}`);
+      log.magenta(`CPU architecture: ${os.arch()}`);
       break;
     default:
-      console.log('Invalid argument. Usage: os --EOL | --cpus | --homedir | --username | --architecture');
+      log.red('Invalid argument. Usage: os --EOL | --cpus | --homedir | --username | --architecture');
     };
 
 };

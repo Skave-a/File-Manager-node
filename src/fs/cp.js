@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import log from '../utils/log.js';
 
 export const cp = async (curDir, file, secondfile) => {
 
@@ -12,7 +13,7 @@ export const cp = async (curDir, file, secondfile) => {
   
     readStream.pipe(writeStream);
   } catch (err) {
-    console.log(err.message);
-    console.log('Invalid command');
+    log.red(err.message);
+    log.blue('Invalid command');
   }
 };

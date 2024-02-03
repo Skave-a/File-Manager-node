@@ -2,6 +2,7 @@ import fs from 'fs';
 import crypto from 'crypto';
 import path from 'path';
 import { curDir as dir} from '../utils/index.js';
+import log from '../utils/log.js';
 
 export const hash = (curDir, file) => {
   
@@ -16,16 +17,16 @@ export const hash = (curDir, file) => {
   
     fileStream.on('end', () => {
       const fileHash = hash.digest('hex');
-      console.log(`Hash - ${fileHash}`);
+      log.blue(`Hash - ${fileHash}`);
       dir(curDir);
     });
   
     fileStream.on('error', (err) => {
-      console.log(err.message);
-      console.log('Invalid command');
+      log.red(err.message);
+      log.blue('Invalid command');
     });
   } catch (err) {
-    console.log(err.message);
-    console.log('Invalid command');
+    log.red(err.message);
+    log.blue('Invalid command');
   }
 };

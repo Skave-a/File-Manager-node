@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import log from '../utils/log.js';
 
 export const add = async (curDir, file) => {
 
@@ -7,8 +8,8 @@ export const add = async (curDir, file) => {
 
   fs.writeFile(pathFile, '', (err) => {
     if (err) {
-      console.log(err.message);
-      console.log('Invalid command');
+      log.red(err.message);
+      log.blue('Invalid command');
     }
   })
 

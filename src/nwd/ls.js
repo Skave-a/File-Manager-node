@@ -1,4 +1,5 @@
 import { readdir } from "node:fs/promises";
+import log from '../utils/log.js';
 
 export const ls = async (curDir) => {
   const directory = [];
@@ -21,7 +22,7 @@ export const ls = async (curDir) => {
     ]);
 
   } catch (err) {
-    console.log(err.message);
-    console.log('Invalid command');
+    log.red(err.message);
+    log.blue('Invalid command');
   }
 };
