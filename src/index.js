@@ -1,5 +1,5 @@
 import { homedir } from 'os';
-import { curDir as dir, COMMANDS } from './utils/index.js';
+import { curDir as dir, COMMANDS, exit } from './utils/index.js';
 import { cwd, chdir } from "node:process";
 import { up, cd, ls } from './nwd/index.js';
 import { cat, add, rn, cp, mv, rm } from './fs/index.js';
@@ -24,6 +24,9 @@ const FM = () => {
     const secondfile = command[2];
 
     switch (command[0]) {
+      case COMMANDS.exit:
+        exit(userName);
+        break;
       case COMMANDS.up:
         curDir = up(curDir);
         break;
@@ -72,8 +75,7 @@ const FM = () => {
   
 
   process.on('SIGINT', () => {
-    console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
-    process.exit();
+    exit(userName);
   })
 };
 

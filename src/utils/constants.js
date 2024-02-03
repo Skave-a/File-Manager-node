@@ -12,4 +12,5 @@ export const COMMANDS = {
   hash: 'hash',
   compress: 'compress',
   decompress: 'decompress',
+  exit: '.exit',
 }
