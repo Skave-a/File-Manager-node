@@ -7,7 +7,8 @@ export const add = async (curDir, file) => {
 
   fs.writeFile(pathFile, '', (err) => {
     if (err) {
-      console.error('Operation failed!');
+      console.log(err.message);
+      console.log('Invalid command');
     }
   })
 

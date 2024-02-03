@@ -21,6 +21,7 @@ export const ls = async (curDir) => {
     ]);
 
   } catch (err) {
-    console.error(err);
+    console.log(err.message);
+    console.log('Invalid command');
   }
 };

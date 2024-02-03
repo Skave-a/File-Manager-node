@@ -12,7 +12,8 @@ export const cat = (curDir, file) => {
     readableStream.destroy();
   });
 
-  readableStream.on('error', (error) => {
+  readableStream.on('error', (err) => {
+    onsole.log(err.message);
     console.log('Invalid command');
     dir(curDir);
   });

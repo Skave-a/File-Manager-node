@@ -1,22 +1,29 @@
 import fs from 'fs';
 import path from 'path';
 
-export const mv = async (curDir, file, secondfile) => {
+export const mv = async (curDir, file, targetDir) => {
+  const sourcePath = path.join(curDir, file);
 
-  const pathOld = path.join(curDir, file);
-  const pathNew = path.join(curDir, secondfile);
+  try {
+    const newName = path.join(curDir, secondfile);
+    await fs.promises.access(newName);
+    console.log(`File ${secondfile} already exists`);
+    return;
+  } catch (error) {
+  try {
+    const targetPath = path.join(targetDir, file);
 
-  const readStream = fs.createReadStream(pathOld);
-  const writeStream = fs.createWriteStream(pathNew);
+    const readStream = fs.createReadStream(sourcePath);
+    const writeStream = fs.createWriteStream(targetPath);
 
-  readStream.pipe(writeStream);
+    readStream.pipe(writeStream);
 
-  writeStream.on('finish', async () => {
-    try {
-      await fs.promises.unlink(pathOld);
-    } catch (err) {
-      throw new Error(errorText);
-    }
+    writeStream.on('finish', async () => {
+      await fs.promises.unlink(sourcePath);
     });
-
+  } catch (err) {
+    console.log(err.message);
+    console.log('Invalid command');
+  }
+}
 };

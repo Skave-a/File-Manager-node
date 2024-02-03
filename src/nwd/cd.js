@@ -15,6 +15,7 @@ export const cd = (curDir, path2) => {
     dir = cwd();
   } catch (err) {
     console.log(err.message);
+    console.log('Invalid command');
     return curDir;
   }
 

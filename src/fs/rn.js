@@ -14,8 +14,8 @@ export const rn = async (curDir, file, secondfile) => {
       const newName = path.join(curDir, secondfile);
       await fs.promises.rename(oldName, newName);
     } catch (err) {
-      console.log('Invalid command');
       console.log(err.message);
+      console.log('Invalid command');
     }
   }
 };
