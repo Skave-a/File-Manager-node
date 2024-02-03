@@ -3,12 +3,11 @@ import path from 'path';
 
 export const rm = async (curDir, file) => {
 
-  const pathFile = path.join(curDir, file);
-
     try {
+      const pathFile = path.join(curDir, file);
       await fs.promises.unlink(pathFile);
     } catch (err) {
-      throw new Error(errorText);
+      console.log(err.message);
+      console.log('Invalid command');
     }
-
 };
