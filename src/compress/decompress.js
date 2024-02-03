@@ -13,11 +13,11 @@ export const decompress = async (curDir, file, secondfile) => {
   const brotli = zlib.createBrotliDecompress();
 
   readStream.on('error', (err) => {
-    console.log(err);
+    console.log(err.message);;
   });
 
   writeStream.on('error', (err) => {
-    console.log(err);
+    console.log(err.message);;
   });
 
   readStream.pipe(brotli).pipe(writeStream);

@@ -20,7 +20,7 @@ export const hash = (curDir, file) => {
   });
 
   fileStream.on('error', (err) => {
-    console.log(err);
+    console.log(err.message);;
   });
 
 };

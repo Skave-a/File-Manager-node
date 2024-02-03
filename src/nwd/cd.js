@@ -14,7 +14,7 @@ export const cd = (curDir, path2) => {
     chdir(path.resolve(curDir, path2));
     dir = cwd();
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
     return curDir;
   }
 
