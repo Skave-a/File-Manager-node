@@ -8,8 +8,7 @@ export const rn = async (curDir, file, secondfile) => {
   try {
     const newName = path.join(curDir, secondfile);
 
-    fs.rename(oldName, newName, (err) => {
-  });
+    fs.rename(oldName, newName);
   } catch (err) {
     console.log(err.message);
   }
