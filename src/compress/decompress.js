@@ -4,21 +4,30 @@ import zlib from 'zlib';
 
 export const decompress = async (curDir, file, secondfile) => {
 
-  const cm = path.join(curDir, file);
-  const decm = path.join(curDir, secondfile);
+  try {
 
-  const readStream = fs.createReadStream(cm);
-  const writeStream = fs.createWriteStream(decm);
-
-  const brotli = zlib.createBrotliDecompress();
-
-  readStream.on('error', (err) => {
-    console.log(err.message);;
-  });
-
-  writeStream.on('error', (err) => {
-    console.log(err.message);;
-  });
-
-  readStream.pipe(brotli).pipe(writeStream);
+    const cm = path.join(curDir, file);
+    const decm = path.join(curDir, secondfile);
+  
+    const readStream = fs.createReadStream(cm);
+    const writeStream = fs.createWriteStream(decm);
+  
+    const brotli = zlib.createBrotliDecompress();
+  
+    readStream.on('error', (err) => {
+      console.log(err.message);
+      console.log('Invalid command');
+    });
+  
+    writeStream.on('error', (err) => {
+      console.log(err.message);
+      console.log('Invalid command');
+    });
+  
+    readStream.pipe(brotli).pipe(writeStream);
+  } catch (err) {
+    console.log(err.message);
+    console.log('Invalid command');
+  }
+  
 }
