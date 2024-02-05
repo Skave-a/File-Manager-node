@@ -3,15 +3,22 @@ import path from 'path';
 import log from '../utils/log.js';
 
 export const cp = async (curDir, file, secondfile) => {
-
-  const pathFile = path.join(curDir, file);
   try {
-    const copyFile = path.join(curDir, secondfile);
+    const sourcePath = path.join(curDir, file);
+    const targetPath = path.join(curDir, secondfile);
 
-    const readStream = fs.createReadStream(pathFile);
-    const writeStream = fs.createWriteStream(copyFile);
-  
+    const sourceStats = await fs.promises.stat(sourcePath);
+    if (sourceStats.isDirectory()) {
+      log.red(`"${file}" is a directory. Cannot copy directories.`);
+      log.blue('Invalid command');
+      return;
+    }
+
+    const readStream = fs.createReadStream(sourcePath);
+    const writeStream = fs.createWriteStream(targetPath);
+
     readStream.pipe(writeStream);
+
   } catch (err) {
     log.red(err.message);
     log.blue('Invalid command');
