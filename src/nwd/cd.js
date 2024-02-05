@@ -9,16 +9,19 @@ export const cd = (curDir, path2) => {
     path2 = '\\' + path2;
   }
 
+  const cleanedPath = path2.replace(/['"]/g, '');
+
   let dir;
 
   try {
-    chdir(path.resolve(curDir, path2));
+    const newPath = path.resolve(curDir, cleanedPath);
+    chdir(newPath);
     dir = cwd();
   } catch (err) {
     log.red(err.message);
     log.blue('Invalid command');
     return curDir;
   }
-
+console.log('dir', dir)
   return dir;
 };

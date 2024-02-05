@@ -21,7 +21,8 @@ dir(curDir);
 const FM = () => {
   process.stdin.on('data', async data => {
     const commandString = data.toString().trim();
-    const command = commandString.toString().split(' ');
+    const command = commandString.toString().match(/['"][^'"]+['"]|\S+/g);
+
     const file = command[1];
     const secondfile = command[2];
 
