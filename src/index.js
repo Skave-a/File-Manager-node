@@ -1,25 +1,25 @@
 import { chdir, cwd } from "node:process";
-import { homedir } from 'os';
-import { compress, decompress } from './compress/index.js';
-import { add, cat, cp, mv, rm, rn } from './fs/index.js';
-import { hash } from './hash/hash.js';
-import { cd, ls, up } from './nwd/index.js';
-import { osFn as os } from './os/os.js';
-import { COMMANDS, curDir as dir, exit } from './utils/index.js';
-import log from './utils/log.js';
+import { homedir } from "os";
+import { compress, decompress } from "./compress/index.js";
+import { add, cat, cp, mv, rm, rn } from "./fs/index.js";
+import { hash } from "./hash/hash.js";
+import { cd, ls, up } from "./nwd/index.js";
+import { osFn as os } from "./os/os.js";
+import { COMMANDS, curDir as dir, exit } from "./utils/index.js";
+import log from "./utils/log.js";
 
-const userName = process.argv.length > 2 ? process.argv[2].slice(11) : 'incognito';
+const userName =
+  process.argv.length > 2 ? process.argv[2].slice(11) : "incognito";
 log.yellow(`Welcome to the File Manager, ${userName}!`);
 
 chdir(homedir());
 
-// для получения текущего рабочего каталога
 let curDir = cwd();
 
 dir(curDir);
 
 const FM = () => {
-  process.stdin.on('data', async data => {
+  process.stdin.on("data", async (data) => {
     const commandString = data.toString().trim();
     const command = commandString.toString().match(/['"][^'"]+['"]|\S+/g);
 
@@ -70,16 +70,15 @@ const FM = () => {
         await decompress(curDir, file, secondfile);
         break;
       default:
-        log.blue('Invalid command');
+        log.blue("Invalid command");
         break;
     }
     log.green(`You are currently in ${curDir}`);
   });
-  
 
-  process.on('SIGINT', () => {
+  process.on("SIGINT", () => {
     exit(userName);
-  })
+  });
 };
 
 FM();

@@ -1,5 +1,5 @@
 import { readdir } from "node:fs/promises";
-import log from '../utils/log.js';
+import log from "../utils/log.js";
 
 export const ls = async (curDir) => {
   const directory = [];
@@ -9,20 +9,19 @@ export const ls = async (curDir) => {
     const files = await readdir(curDir, { withFileTypes: true });
 
     for await (const file of files) {
-      if (file.isFile() ) {
+      if (file.isFile()) {
         filesInDir.push(file.name);
       } else {
         directory.push(file.name);
       }
     }
-    
+
     console.table([
       ...directory.map((file) => ({ Name: file, Type: "directory" })),
       ...filesInDir.map((file) => ({ Name: file, Type: "file" })),
     ]);
-
   } catch (err) {
     log.red(err.message);
-    log.blue('Invalid command');
+    log.blue("Invalid command");
   }
 };

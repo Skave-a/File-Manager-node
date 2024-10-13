@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import log from '../utils/log.js';
+import fs from "fs";
+import path from "path";
+import log from "../utils/log.js";
 
 export const mv = async (curDir, file, targetDir) => {
   const sourcePath = path.join(curDir, file);
@@ -9,7 +9,7 @@ export const mv = async (curDir, file, targetDir) => {
     const sourceStats = await fs.promises.stat(sourcePath);
     if (sourceStats.isDirectory()) {
       log.red(`"${file}" is a directory. Cannot move directories.`);
-      log.blue('Invalid command');
+      log.blue("Invalid command");
       return;
     }
   } catch (error) {
@@ -19,7 +19,10 @@ export const mv = async (curDir, file, targetDir) => {
 
   try {
     const newName = path.join(targetDir, file);
-    const targetDirExists = await fs.promises.access(targetDir).then(() => true).catch(() => false);
+    const targetDirExists = await fs.promises
+      .access(targetDir)
+      .then(() => true)
+      .catch(() => false);
     if (!targetDirExists) {
       log.red(`Target directory ${targetDir} does not exist`);
       return;
@@ -27,7 +30,10 @@ export const mv = async (curDir, file, targetDir) => {
 
     const targetPath = path.join(targetDir, file);
 
-    const targetFileExists = await fs.promises.access(targetPath).then(() => true).catch(() => false);
+    const targetFileExists = await fs.promises
+      .access(targetPath)
+      .then(() => true)
+      .catch(() => false);
     if (targetFileExists) {
       log.red(`File ${newName} already exists`);
       return;
@@ -38,11 +44,11 @@ export const mv = async (curDir, file, targetDir) => {
 
     readStream.pipe(writeStream);
 
-    writeStream.on('finish', async () => {
+    writeStream.on("finish", async () => {
       await fs.promises.unlink(sourcePath);
     });
   } catch (err) {
     log.red(err.message);
-    log.blue('Invalid command');
+    log.blue("Invalid command");
   }
 };

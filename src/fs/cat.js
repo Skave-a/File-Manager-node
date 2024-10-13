@@ -1,25 +1,25 @@
-import { createReadStream } from 'fs';
-import path from 'path';
-import { curDir as dir } from '../utils/curDir.js';
-import log from '../utils/log.js';
+import { createReadStream } from "fs";
+import path from "path";
+import { curDir as dir } from "../utils/curDir.js";
+import log from "../utils/log.js";
 
 export const cat = (curDir, file) => {
   const pathFile = path.join(curDir, file);
 
   const readableStream = createReadStream(pathFile);
 
-  readableStream.on('data', (data) => {
+  readableStream.on("data", (data) => {
     console.log(data.toString());
     readableStream.destroy();
   });
 
-  readableStream.on('error', (err) => {
+  readableStream.on("error", (err) => {
     log.red(err.message);
-    log.blue('Invalid command');
+    log.blue("Invalid command");
     dir(curDir);
   });
 
-  readableStream.on('close', () => {
+  readableStream.on("close", () => {
     dir(curDir);
   });
 

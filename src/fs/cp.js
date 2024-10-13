@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import log from '../utils/log.js';
+import fs from "fs";
+import path from "path";
+import log from "../utils/log.js";
 
 export const cp = async (curDir, file, secondfile) => {
   try {
@@ -10,7 +10,7 @@ export const cp = async (curDir, file, secondfile) => {
     const sourceStats = await fs.promises.stat(sourcePath);
     if (sourceStats.isDirectory()) {
       log.red(`"${file}" is a directory. Cannot copy directories.`);
-      log.blue('Invalid command');
+      log.blue("Invalid command");
       return;
     }
 
@@ -18,9 +18,8 @@ export const cp = async (curDir, file, secondfile) => {
     const writeStream = fs.createWriteStream(targetPath);
 
     readStream.pipe(writeStream);
-
   } catch (err) {
     log.red(err.message);
-    log.blue('Invalid command');
+    log.blue("Invalid command");
   }
 };

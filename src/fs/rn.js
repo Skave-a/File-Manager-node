@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import log from '../utils/log.js';
+import fs from "fs";
+import path from "path";
+import log from "../utils/log.js";
 
 export const rn = async (curDir, file, secondfile) => {
   const oldName = path.join(curDir, file);
@@ -16,7 +16,7 @@ export const rn = async (curDir, file, secondfile) => {
       await fs.promises.rename(oldName, newName);
     } catch (err) {
       log.red(err.message);
-      log.blue('Invalid command');
+      log.blue("Invalid command");
     }
   }
 };
